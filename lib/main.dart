@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mobitra/Screens/splash.dart'; // Make sure this file exists
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobitra/bloc/login/login_bloc.dart';
+import 'package:mobitra/bloc/permission_bloc.dart';
+import 'package:mobitra/Screens/splash.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => PermissionBloc()),
+        BlocProvider(create: (_) => LoginBloc()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
